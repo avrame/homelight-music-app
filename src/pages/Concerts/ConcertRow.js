@@ -20,9 +20,13 @@ function ConcertRow({ concert }) {
     ticket_links
   } = concert;
 
+  function createTitle() {
+    return { __html: name || title || 'unnamed' };
+  }
+
   return (
     <tr>
-      <td><a href={`/concerts/${id}`}>{name || title || 'untitled'}</a></td>
+      <td><a href={`/concerts/${id}`} dangerouslySetInnerHTML={createTitle()} /></td>
       <td>{format(new Date(event_date_time), DATE_FORMAT)}</td>
       <td><ConcertLocation venueName={venue_name} locality={locality} region={region} /></td>
       <td>{ticket_status}</td>

@@ -18,10 +18,14 @@ function ConcertInfo() {
 
   const { name, title } = concert;
 
+  function createTitle() {
+    return { __html: name || title || 'unnamed' };
+  }
+
   if (Object.keys(concert).length) {
     return (
       <>
-        <h1>{name || title || 'unnamed'}</h1>
+        <h1 dangerouslySetInnerHTML={createTitle()} />
       </>
     );
   }
