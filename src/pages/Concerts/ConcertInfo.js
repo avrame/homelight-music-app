@@ -5,7 +5,7 @@ import { format } from "date-fns";
 
 import { DATE_FORMAT } from "../../lib";
 import { fetchConcert, fetchArtistsList } from "../../lib/api";
-import ConcertLocation from "./ConcertLocation";
+import ConcertLocation from "./components/ConcertLocation";
 
 const GOOGLE_API_KEY = "AIzaSyAFBnQoZ7vZsIYIyd2ChLhFN8rI5P-APXg";
 

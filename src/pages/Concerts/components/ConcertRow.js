@@ -1,7 +1,7 @@
 import React from "react";
 import { format } from "date-fns";
 
-import { DATE_FORMAT } from "../../lib";
+import { DATE_FORMAT } from "../../../lib";
 import ConcertLocation from "./ConcertLocation";
 import BuyTickets from "./BuyTickets";
 

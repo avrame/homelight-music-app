@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 
-import ConcertRow from "./ConcertRow";
+import ConcertRow from "./components/ConcertRow";
 import ConcertInfo from "./ConcertInfo";
 import { fetchConcerts } from "../../lib/api";
 
