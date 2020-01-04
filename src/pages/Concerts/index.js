@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { Switch, Route, useRouteMatch } from 'react-router-dom';
-import Table from 'react-bootstrap/Table';
+import React, { useEffect, useState } from "react";
+import { Switch, Route, useRouteMatch } from "react-router-dom";
+import Table from "react-bootstrap/Table";
 
-import ConcertRow from './ConcertRow';
-import ConcertInfo from './ConcertInfo';
+import ConcertRow from "./ConcertRow";
+import ConcertInfo from "./ConcertInfo";
+import { fetchConcerts } from "../../lib/api";
 
 function Concerts() {
   const [concerts, setConcerts] = useState([]);
 
   useEffect(() => {
-    async function fetchConcerts() {
-      const response = await fetch('https://hl-candidate-events.herokuapp.com/concerts');
-      const fetchedConcerts = await response.json();
+    async function getConcerts() {
+      const fetchedConcerts = await fetchConcerts();
       setConcerts(fetchedConcerts);
     }
 
-    fetchConcerts();
+    getConcerts();
   }, []);
 
   const match = useRouteMatch();
@@ -40,7 +40,9 @@ function Concerts() {
             </tr>
           </thead>
           <tbody>
-            {concerts.map(concert => <ConcertRow key={concert._id} concert={concert} />)}
+            {concerts.map(concert => (
+              <ConcertRow key={concert._id} concert={concert} />
+            ))}
           </tbody>
         </Table>
       </Route>
