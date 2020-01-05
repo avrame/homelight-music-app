@@ -23,7 +23,7 @@ export async function fetchConcert(concertId) {
 export async function fetchArtists() {
   try {
     const response = await fetch(
-      "https://hl-candidate-events.herokuapp.com/artists"
+      "https://hl-candidate-events.herokuapp.com/artists?_sort=name&_order=asc"
     );
     return response.json();
   } catch (error) {
@@ -64,7 +64,7 @@ export async function fetchArtist(artistId) {
 export async function fetchVenues() {
   try {
     const response = await fetch(
-      "https://hl-candidate-events.herokuapp.com/venues/"
+      "https://hl-candidate-events.herokuapp.com/venues?_sort=name&_order=asc"
     );
     return response.json();
   } catch (error) {

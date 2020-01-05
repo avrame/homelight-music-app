@@ -3,9 +3,16 @@ import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
 
 import { fetchVenues } from "../../lib/api";
 import VenueProfile from "./profile";
+import useSortTable from "../../hooks/useSortTable";
+import SortTableHeader from "../../components/SortTableHeader";
 
 function Venues() {
   const [venues, setVenues] = useState([]);
+  const { sortedColumn, sortAscending, sortColumn } = useSortTable(
+    "name",
+    venues,
+    setVenues
+  );
 
   useEffect(() => {
     async function getVenues() {
@@ -26,13 +33,26 @@ function Venues() {
       <Route path={match.path}>
         <section className="section">
           <div className="container">
-            <h1>Venues</h1>
-            <p>Here is a list of all the venues.</p>
+            <h1 className="title">Venues</h1>
             <table className="table">
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Location</th>
+                  <SortTableHeader
+                    columnProp="name"
+                    sortedColumn={sortedColumn}
+                    sortAscending={sortAscending}
+                    sortColumn={sortColumn}
+                  >
+                    Name
+                  </SortTableHeader>
+                  <SortTableHeader
+                    columnProp="city_state"
+                    sortedColumn={sortedColumn}
+                    sortAscending={sortAscending}
+                    sortColumn={sortColumn}
+                  >
+                    Location
+                  </SortTableHeader>
                   <th>Age Restriction</th>
                 </tr>
               </thead>

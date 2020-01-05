@@ -4,10 +4,17 @@ import { Switch, Route, useRouteMatch, Link } from "react-router-dom";
 import ArtistProfile from "./profile";
 import { fetchArtists } from "../../lib/api";
 import TagList from "../../components/TagList";
+import useSortTable from "../../hooks/useSortTable";
+import SortTableHeader from "../../components/SortTableHeader";
 
 function Artists() {
   const match = useRouteMatch();
   const [artists, setArtists] = useState([]);
+  const { sortedColumn, sortAscending, sortColumn } = useSortTable(
+    "name",
+    artists,
+    setArtists
+  );
 
   useEffect(() => {
     async function getArtists() {
@@ -31,7 +38,14 @@ function Artists() {
             <table className="table">
               <thead>
                 <tr>
-                  <th>Name</th>
+                  <SortTableHeader
+                    columnProp="name"
+                    sortedColumn={sortedColumn}
+                    sortAscending={sortAscending}
+                    sortColumn={sortColumn}
+                  >
+                    Name
+                  </SortTableHeader>
                   <th>Genres</th>
                 </tr>
               </thead>

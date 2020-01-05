@@ -5,12 +5,16 @@ import ConcertRow from "./components/ConcertRow";
 import ConcertProfile from "./profile";
 import { fetchConcerts } from "../../lib/api";
 import SortTableHeader from "../../components/SortTableHeader";
+import useSortTable from "../../hooks/useSortTable";
 
 function Concerts() {
   const [concerts, setConcerts] = useState([]);
-  const [sortedColumn, setSortedColumn] = useState("name");
-  const [sortAscending, setSortAscending] = useState(true);
   const match = useRouteMatch();
+  const { sortedColumn, sortAscending, sortColumn } = useSortTable(
+    "name",
+    concerts,
+    setConcerts
+  );
 
   useEffect(() => {
     async function getConcerts() {
@@ -19,27 +23,6 @@ function Concerts() {
 
     getConcerts();
   }, []);
-
-  function sortColumn(columnProp) {
-    setConcerts(
-      concerts.sort((concertA, concertB) => {
-        let returnVal;
-        const a = concertA[columnProp];
-        const b = concertB[columnProp];
-        if (a < b) {
-          returnVal = -1;
-        } else if (a > b) {
-          returnVal = 1;
-        } else {
-          returnVal = 0;
-        }
-        if (sortAscending) returnVal *= -1;
-        return returnVal;
-      })
-    );
-    setSortedColumn(columnProp);
-    setSortAscending(!sortAscending);
-  }
 
   return (
     <Switch>
