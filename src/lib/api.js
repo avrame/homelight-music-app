@@ -1,7 +1,7 @@
 export async function fetchConcerts() {
   try {
     const response = await fetch(
-      "https://hl-candidate-events.herokuapp.com/concerts"
+      "https://hl-candidate-events.herokuapp.com/concerts?_sort=name&_order=asc"
     );
     return response.json();
   } catch (error) {

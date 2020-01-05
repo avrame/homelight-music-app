@@ -40,7 +40,7 @@ function VenueProfile() {
       <div className="container">
         <div className="columns">
           <div className="column">
-            <img src={image} width={192} />
+            <img src={image} width={192} alt="Venue" />
 
             <h2 className="title is-3">Genres</h2>
             <TagList tags={genres} />

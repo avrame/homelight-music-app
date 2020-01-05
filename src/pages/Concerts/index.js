@@ -4,20 +4,42 @@ import { Switch, Route, useRouteMatch } from "react-router-dom";
 import ConcertRow from "./components/ConcertRow";
 import ConcertProfile from "./profile";
 import { fetchConcerts } from "../../lib/api";
+import SortTableHeader from "../../components/SortTableHeader";
 
 function Concerts() {
   const [concerts, setConcerts] = useState([]);
+  const [sortedColumn, setSortedColumn] = useState("name");
+  const [sortAscending, setSortAscending] = useState(true);
+  const match = useRouteMatch();
 
   useEffect(() => {
     async function getConcerts() {
-      const fetchedConcerts = await fetchConcerts();
-      setConcerts(fetchedConcerts);
+      setConcerts(await fetchConcerts());
     }
 
     getConcerts();
   }, []);
 
-  const match = useRouteMatch();
+  function sortColumn(columnProp) {
+    setConcerts(
+      concerts.sort((concertA, concertB) => {
+        let returnVal;
+        const a = concertA[columnProp];
+        const b = concertB[columnProp];
+        if (a < b) {
+          returnVal = -1;
+        } else if (a > b) {
+          returnVal = 1;
+        } else {
+          returnVal = 0;
+        }
+        if (sortAscending) returnVal *= -1;
+        return returnVal;
+      })
+    );
+    setSortedColumn(columnProp);
+    setSortAscending(!sortAscending);
+  }
 
   return (
     <Switch>
@@ -31,11 +53,39 @@ function Concerts() {
             <table className="table">
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Event Date</th>
+                  <SortTableHeader
+                    columnProp="name"
+                    sortedColumn={sortedColumn}
+                    sortAscending={sortAscending}
+                    sortColumn={sortColumn}
+                  >
+                    Name
+                  </SortTableHeader>
+                  <SortTableHeader
+                    columnProp="event_date_time"
+                    sortedColumn={sortedColumn}
+                    sortAscending={sortAscending}
+                    sortColumn={sortColumn}
+                  >
+                    Event Date
+                  </SortTableHeader>
                   <th>Location</th>
-                  <th>Ticket Status</th>
-                  <th>Tickets on Sale Date</th>
+                  <SortTableHeader
+                    columnProp="ticket_status"
+                    sortedColumn={sortedColumn}
+                    sortAscending={sortAscending}
+                    sortColumn={sortColumn}
+                  >
+                    Ticket Status
+                  </SortTableHeader>
+                  <SortTableHeader
+                    columnProp="on_sale_datetime"
+                    sortedColumn={sortedColumn}
+                    sortAscending={sortAscending}
+                    sortColumn={sortColumn}
+                  >
+                    Tickets on Sale Date
+                  </SortTableHeader>
                   <th>Buy Tickets</th>
                 </tr>
               </thead>
