@@ -6,6 +6,7 @@ function Definition({ term, value }) {
       <>
         <dt>{term}</dt>
         <dd>{value}</dd>
+        <br />
       </>
     );
   }

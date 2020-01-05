@@ -1,0 +1,8 @@
+dt {
+  font-weight: bold;
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+dd {
+  display: inline-block;
+}

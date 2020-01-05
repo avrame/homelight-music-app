@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route, useRouteMatch, Link } from "react-router-dom";
 
-import ArtistInfo from "./ArtistInfo";
+import ArtistProfile from "./profile";
 import { fetchArtists } from "../../lib/api";
+import TagList from "../../components/TagList";
 
 function Artists() {
   const match = useRouteMatch();
@@ -20,7 +21,7 @@ function Artists() {
   return (
     <Switch>
       <Route path={`${match.path}/:artistId`}>
-        <ArtistInfo />
+        <ArtistProfile />
       </Route>
       <Route path={match.path}>
         <section className="section">
@@ -44,13 +45,7 @@ function Artists() {
                           <Link to={`/artists/${id}`}>{name}</Link>
                         </td>
                         <td>
-                          <div className="tags">
-                            {genres.map((genre, idx) => (
-                              <span key={idx} className="tag is-info">
-                                {genre}
-                              </span>
-                            ))}
-                          </div>
+                          <TagList tags={genres} />
                         </td>
                       </tr>
                     );
