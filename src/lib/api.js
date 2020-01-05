@@ -3,9 +3,9 @@ export async function fetchConcerts() {
     const response = await fetch(
       "https://hl-candidate-events.herokuapp.com/concerts"
     );
-    return await response.json();
+    return response.json();
   } catch (error) {
-    console.log("Fetching all concerts failed", error);
+    console.log("Failed to fetch all concerts", error);
   }
 }
 
@@ -14,9 +14,9 @@ export async function fetchConcert(concertId) {
     const response = await fetch(
       `https://hl-candidate-events.herokuapp.com/concerts/${concertId}`
     );
-    return await response.json();
+    return response.json();
   } catch (error) {
-    console.log(`Fetching a concert with id '${concertId}' failed`, error);
+    console.log(`Failed to fetch the concert with id '${concertId}'`, error);
   }
 }
 
@@ -25,9 +25,9 @@ export async function fetchArtists() {
     const response = await fetch(
       "https://hl-candidate-events.herokuapp.com/artists"
     );
-    return await response.json();
+    return response.json();
   } catch (error) {
-    console.log("Fetching all Artists failed", error);
+    console.log("Failed to fetch all artists", error);
   }
 }
 
@@ -42,7 +42,7 @@ export async function fetchArtistsList(artistIds) {
     return artistsArray;
   } catch (error) {
     console.log(
-      `Fetching artists with ids [${artistIds.join(",")}] failed`,
+      `Failed to fetch artists with ids [${artistIds.join(",")}]`,
       error
     );
   }
@@ -55,8 +55,30 @@ export async function fetchArtistPromise(artistId) {
 export async function fetchArtist(artistId) {
   try {
     const response = await fetchArtistPromise(artistId);
-    return await response.json();
+    return response.json();
   } catch (error) {
-    console.log(`Fetching artist with id '${artistId}' failed`, error);
+    console.log(`Failed to fetch artist with id '${artistId}'`, error);
+  }
+}
+
+export async function fetchVenues() {
+  try {
+    const response = await fetch(
+      "https://hl-candidate-events.herokuapp.com/venues/"
+    );
+    return response.json();
+  } catch (error) {
+    console.log("Failed to fetch all venues.", error);
+  }
+}
+
+export async function fetchVenueBySlug(slug) {
+  try {
+    const response = await fetch(
+      `https://hl-candidate-events.herokuapp.com/venues?slug=${slug}`
+    );
+    return response.json();
+  } catch (error) {
+    console.log(`Failed to fetch venue with slug '${slug}'`, error);
   }
 }

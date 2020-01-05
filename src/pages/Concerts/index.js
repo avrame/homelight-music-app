@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
-import Table from "react-bootstrap/Table";
 
 import ConcertRow from "./components/ConcertRow";
-import ConcertInfo from "./ConcertInfo";
+import ConcertProfile from "./profile";
 import { fetchConcerts } from "../../lib/api";
 
 function Concerts() {
@@ -23,28 +22,31 @@ function Concerts() {
   return (
     <Switch>
       <Route path={`${match.path}/:concertId`}>
-        <ConcertInfo />
+        <ConcertProfile />
       </Route>
       <Route path={match.path}>
-        <h1>Concerts</h1>
-        <p>Here is a list of all the concerts.</p>
-        <Table striped hover>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Event Date</th>
-              <th>Location</th>
-              <th>Ticket Status</th>
-              <th>Tickets on Sale Date</th>
-              <th>Buy Tickets</th>
-            </tr>
-          </thead>
-          <tbody>
-            {concerts.map(concert => (
-              <ConcertRow key={concert._id} concert={concert} />
-            ))}
-          </tbody>
-        </Table>
+        <section className="section">
+          <div className="container">
+            <h1 className="title">Concerts</h1>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Event Date</th>
+                  <th>Location</th>
+                  <th>Ticket Status</th>
+                  <th>Tickets on Sale Date</th>
+                  <th>Buy Tickets</th>
+                </tr>
+              </thead>
+              <tbody>
+                {concerts.map(concert => (
+                  <ConcertRow key={concert._id} concert={concert} />
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
       </Route>
     </Switch>
   );

@@ -1,28 +1,19 @@
-import React from 'react';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
+import "bulma/css/bulma.css";
 
-import Home from './pages/Home';
-import Concerts from './pages/Concerts';
-import Artists from './pages/Artists';
-import Venues from './pages/Venues';
-
-import 'bootstrap/dist/css/bootstrap.css';
-import './App.css';
+import Home from "./pages/Home";
+import Concerts from "./pages/Concerts";
+import Artists from "./pages/Artists";
+import Venues from "./pages/Venues";
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <Navbar bg="dark" variant="dark">
-          <Navbar.Brand href="/">Music Browser</Navbar.Brand>
-          <Nav className="mr-auto">
-            <Nav.Link href="/concerts">Concerts</Nav.Link>
-            <Nav.Link href="/artists">Artists</Nav.Link>
-            <Nav.Link href="/venues">Venues</Nav.Link>
-          </Nav>
-        </Navbar>
+        <Link to="/concerts">Concerts</Link>
+        <Link to="/artists">Artists</Link>
+        <Link to="/venues">Venues</Link>
 
         <Switch>
           <Route path="/concerts">
@@ -39,7 +30,7 @@ function App() {
           </Route>
         </Switch>
       </div>
-      </Router>
+    </Router>
   );
 }
 

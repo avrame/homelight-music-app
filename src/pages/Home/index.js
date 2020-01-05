@@ -1,11 +1,13 @@
-import React from 'react';
+import React from "react";
 
 function Home() {
   return (
-    <>
-      <h1>Home</h1>
-      <p>Welcome to Music Browser!</p>
-    </>
+    <section className="section">
+      <div className="container">
+        <h1>Home</h1>
+        <p>Welcome to Music Browser!</p>
+      </div>
+    </section>
   );
 }
 
