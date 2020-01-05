@@ -2,12 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { format } from "date-fns";
 
-import { DATE_FORMAT } from "../../lib";
+import { DATE_FORMAT, GOOGLE_API_KEY } from "../../lib";
 import { fetchConcert, fetchArtistsList } from "../../lib/api";
 import ConcertLocation from "./components/ConcertLocation";
 import Definition from "../../components/Definition";
-
-const GOOGLE_API_KEY = "AIzaSyAFBnQoZ7vZsIYIyd2ChLhFN8rI5P-APXg";
 
 function ConcertProfile() {
   const [concert, setConcert] = useState({});

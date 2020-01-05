@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+import { GOOGLE_API_KEY } from "../../lib";
 import { fetchVenueBySlug } from "../../lib/api";
 import Definition from "../../components/Definition";
 import TagList from "../../components/TagList";
@@ -18,7 +19,8 @@ function VenueProfile() {
     formatted_website,
     genres = [],
     age_restriction,
-    size
+    size,
+    loc: { coordinates: [long, lat] = [] } = {}
   } = venue;
   console.log(venue);
 
@@ -40,7 +42,7 @@ function VenueProfile() {
           <div className="column">
             <img src={image} width={192} />
 
-            <h2>Genres</h2>
+            <h2 className="title is-3">Genres</h2>
             <TagList tags={genres} />
           </div>
 
@@ -69,6 +71,19 @@ function VenueProfile() {
                 }
               />
             </dl>
+
+            <h2 className="title is-3">Location</h2>
+            {lat && long && (
+              <iframe
+                title="Venue Map"
+                width="450"
+                height="450"
+                frameBorder="0"
+                style={{ border: "0" }}
+                src={`https://www.google.com/maps/embed/v1/search?key=${GOOGLE_API_KEY}&q=${name}&center=${lat},${long}&zoom=18`}
+                allowFullScreen
+              ></iframe>
+            )}
           </div>
         </div>
       </div>
