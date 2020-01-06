@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   NavLink,
@@ -15,6 +15,12 @@ import Artists from "./pages/Artists";
 import Venues from "./pages/Venues";
 
 function App() {
+  const [mobileNavVisible, setMobileNavVisible] = useState(false);
+
+  function toggleMobileNav() {
+    setMobileNavVisible(!mobileNavVisible);
+  }
+
   return (
     <Router>
       <div className="App">
@@ -27,8 +33,22 @@ function App() {
             <Link to="/" className="navbar-item">
               Music Browser
             </Link>
+            <a
+              role="button"
+              className={`navbar-burger burger${
+                mobileNavVisible ? " is-active" : ""
+              }`}
+              aria-label="menu"
+              aria-expanded="false"
+              data-target="navbarBasicExample"
+              onClick={toggleMobileNav}
+            >
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+            </a>
           </div>
-          <div className="navbar-menu">
+          <div className={`navbar-menu${mobileNavVisible ? " is-active" : ""}`}>
             <div className="navbar-start">
               <NavLink
                 to="/concerts"
