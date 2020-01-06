@@ -51,10 +51,10 @@ function ConcertProfile() {
     return (
       <section className="section">
         <div className="container">
-          <h1 className="title" dangerouslySetInnerHTML={createTitle()} />
+          <h1 className="title is-1" dangerouslySetInnerHTML={createTitle()} />
           <div className="columns">
             <div className="column">
-              <h2>Artists</h2>
+              <h2 className="title is-3">Artists</h2>
               <ul>
                 {artists.map((artist, idx) => (
                   <li key={idx}>
@@ -65,7 +65,7 @@ function ConcertProfile() {
             </div>
 
             <div className="column">
-              <h2>Location</h2>
+              <h2 className="title is-3">Location</h2>
               <ConcertLocation
                 venueName={venue_name}
                 locality={locality}
