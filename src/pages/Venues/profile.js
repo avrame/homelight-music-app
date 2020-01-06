@@ -22,7 +22,6 @@ function VenueProfile() {
     size,
     loc: { coordinates: [long, lat] = [] } = {}
   } = venue;
-  console.log(venue);
 
   useEffect(() => {
     async function getVenue() {

@@ -35,7 +35,6 @@ function ConcertProfile() {
   useEffect(() => {
     async function getArtists() {
       const fetchedArtists = await fetchArtistsList(artistIds);
-      console.log(fetchedArtists);
       setArtists(fetchedArtists);
     }
 

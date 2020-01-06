@@ -30,8 +30,6 @@ function ArtistInfo() {
     getArtist();
   }, [artistId]);
 
-  console.log({ artist });
-
   return (
     <section className="section">
       <div className="container">
