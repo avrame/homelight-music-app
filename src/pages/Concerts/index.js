@@ -6,6 +6,8 @@ import ConcertProfile from "./profile";
 import { fetchConcerts } from "../../lib/api";
 import SortTableHeader from "../../components/SortTableHeader";
 import useSortTable from "../../hooks/useSortTable";
+import FilterTableHeader from "../../components/FilterTableHeader";
+import useFilterTable from "../../hooks/useFilterTable";
 
 function Concerts() {
   const [concerts, setConcerts] = useState([]);
@@ -15,6 +17,12 @@ function Concerts() {
     concerts,
     setConcerts
   );
+  const [
+    nameFilter,
+    filterByNames,
+    clearNameFilter,
+    filteredConcerts
+  ] = useFilterTable(concerts, "name");
 
   useEffect(() => {
     async function getConcerts() {
@@ -33,7 +41,7 @@ function Concerts() {
         <section className="section">
           <div className="container">
             <h1 className="title">Concerts</h1>
-            <table className="table">
+            <table className="table is-fullwidth">
               <thead>
                 <tr>
                   <SortTableHeader
@@ -71,9 +79,22 @@ function Concerts() {
                   </SortTableHeader>
                   <th>Buy Tickets</th>
                 </tr>
+                <tr>
+                  <FilterTableHeader
+                    value={nameFilter}
+                    placeholder="Filter Concert Names"
+                    onChange={filterByNames}
+                    clearFilter={clearNameFilter}
+                  />
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
               </thead>
               <tbody>
-                {concerts.map(concert => (
+                {filteredConcerts.map(concert => (
                   <ConcertRow key={concert._id} concert={concert} />
                 ))}
               </tbody>

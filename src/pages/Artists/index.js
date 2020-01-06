@@ -6,6 +6,8 @@ import { fetchArtists } from "../../lib/api";
 import TagList from "../../components/TagList";
 import useSortTable from "../../hooks/useSortTable";
 import SortTableHeader from "../../components/SortTableHeader";
+import FilterTableHeader from "../../components/FilterTableHeader";
+import useFilterTable from "../../hooks/useFilterTable";
 
 function Artists() {
   const match = useRouteMatch();
@@ -15,6 +17,12 @@ function Artists() {
     artists,
     setArtists
   );
+  const [
+    nameFilter,
+    filterByNames,
+    clearNameFilter,
+    artistsFilteredByName
+  ] = useFilterTable(artists, "name");
 
   useEffect(() => {
     async function getArtists() {
@@ -35,7 +43,7 @@ function Artists() {
           <div className="container">
             <h1 className="title">Artists</h1>
             <p>Here is a list of all the artists.</p>
-            <table className="table">
+            <table className="table is-fullwidth">
               <thead>
                 <tr>
                   <SortTableHeader
@@ -48,22 +56,30 @@ function Artists() {
                   </SortTableHeader>
                   <th>Genres</th>
                 </tr>
+                <tr>
+                  <FilterTableHeader
+                    value={nameFilter}
+                    placeholder="Filter Concert Names"
+                    onChange={filterByNames}
+                    clearFilter={clearNameFilter}
+                  />
+                  <th></th>
+                </tr>
               </thead>
               <tbody>
-                {artists &&
-                  artists.map((artist, idx) => {
-                    const { id, name, genres } = artist;
-                    return (
-                      <tr key={idx}>
-                        <td>
-                          <Link to={`/artists/${id}`}>{name}</Link>
-                        </td>
-                        <td>
-                          <TagList tags={genres} />
-                        </td>
-                      </tr>
-                    );
-                  })}
+                {artistsFilteredByName.map((artist, idx) => {
+                  const { id, name, genres } = artist;
+                  return (
+                    <tr key={idx}>
+                      <td>
+                        <Link to={`/artists/${id}`}>{name}</Link>
+                      </td>
+                      <td>
+                        <TagList tags={genres} />
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

@@ -5,6 +5,8 @@ import { fetchVenues } from "../../lib/api";
 import VenueProfile from "./profile";
 import useSortTable from "../../hooks/useSortTable";
 import SortTableHeader from "../../components/SortTableHeader";
+import useFilterTable from "../../hooks/useFilterTable";
+import FilterTableHeader from "../../components/FilterTableHeader";
 
 function Venues() {
   const [venues, setVenues] = useState([]);
@@ -13,6 +15,18 @@ function Venues() {
     venues,
     setVenues
   );
+  const [
+    nameFilter,
+    filterByNames,
+    clearNameFilter,
+    venuesFilteredByName
+  ] = useFilterTable(venues, "name");
+  const [
+    locationsFilter,
+    filterByLocations,
+    clearLocationsFilter,
+    venuesFilteredByNameAndLocations
+  ] = useFilterTable(venuesFilteredByName, "city_state");
 
   useEffect(() => {
     async function getVenues() {
@@ -34,7 +48,7 @@ function Venues() {
         <section className="section">
           <div className="container">
             <h1 className="title">Venues</h1>
-            <table className="table">
+            <table className="table is-fullwidth">
               <thead>
                 <tr>
                   <SortTableHeader
@@ -55,9 +69,24 @@ function Venues() {
                   </SortTableHeader>
                   <th>Age Restriction</th>
                 </tr>
+                <tr>
+                  <FilterTableHeader
+                    value={nameFilter}
+                    placeholder="Filter Names"
+                    onChange={filterByNames}
+                    clearFilter={clearNameFilter}
+                  />
+                  <FilterTableHeader
+                    value={locationsFilter}
+                    placeholder="Filter Locations"
+                    onChange={filterByLocations}
+                    clearFilter={clearLocationsFilter}
+                  />
+                  <th></th>
+                </tr>
               </thead>
               <tbody>
-                {venues.map((venue, idx) => {
+                {venuesFilteredByNameAndLocations.map((venue, idx) => {
                   const { name, slug, city_state, age_restriction } = venue;
                   return (
                     <tr key={idx}>

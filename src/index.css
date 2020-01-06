@@ -11,3 +11,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.filter input[type="text"] {
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0.4rem;
+}
+.filter .icon {
+  margin-left: -1.75rem;
+  color: #999;
+  cursor: pointer;
+}
+.filter .icon:hover {
+  color: #666;
+}
+.filter .icon:active {
+  color: #000;
+}
